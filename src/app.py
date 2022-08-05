@@ -19,34 +19,6 @@ from sklearn.preprocessing import StandardScaler
 url = 'https://raw.githubusercontent.com/4GeeksAcademy/regularized-linear-regression-project-tutorial/main/dataset.csv'
 df_raw = pd.read_csv(url)
 
-# Make a copy of the raw datset
-df = df_raw.copy()
-
-# Split dataframe in features and target
-# The variable chosen as target is 'Total Specialist Physicians (2019)'
-X= df.drop(['CNTY_FIPS','fips','Active Physicians per 100000 Population 2018 (AAMC)','Total Active Patient Care Physicians per 100000 Population 2018 (AAMC)', 'Active Primary Care Physicians per 100000 Population 2018 (AAMC)', 'Active Patient Care Primary Care Physicians per 100000 Population 2018 (AAMC)','Active General Surgeons per 100000 Population 2018 (AAMC)','Active Patient Care General Surgeons per 100000 Population 2018 (AAMC)','Total nurse practitioners (2019)','Total physician assistants (2019)','Total physician assistants (2019)','Total Hospitals (2019)','Internal Medicine Primary Care (2019)','Family Medicine/General Practice Primary Care (2019)','STATE_NAME','COUNTY_NAME','ICU Beds_x','Total Specialist Physicians (2019)'], axis=1)
-y=df['Total Specialist Physicians (2019)']
-
-
-## Model 2: alpha selected by CV
-
-pipe2 = make_pipeline(StandardScaler(), Lasso())
-
-params={
-    'lasso__fit_intercept':[True,False],
-    'lasso__alpha':10.0**np.arange(-2, 6, 1)
-}
-
-#setting up the grid search
-gs=GridSearchCV(pipe2,params,n_jobs=-1,cv=5)
-
-
-# get coefficients
-coef_list=model2[1].coef_
-
-# Location of Lasso coefficients
-loc2=[i for i, e in enumerate(coef_list) if e != 0]
-
 
 
 #cargo los modelos

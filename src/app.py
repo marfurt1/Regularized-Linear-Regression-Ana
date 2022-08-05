@@ -41,9 +41,6 @@ params={
 gs=GridSearchCV(pipe2,params,n_jobs=-1,cv=5)
 
 
-# Features whose coefficiet is different from zero selected with Model 2
-model2 = gs.best_estimator_
-
 # get coefficients
 coef_list=model2[1].coef_
 

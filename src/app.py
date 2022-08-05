@@ -27,7 +27,7 @@ filename='../models/final_ols_model.sav'
 modelo_ols = pickle.load(open("../models/final_ols_model.sav", 'rb'))
 
 filename='../models/final_lasso_model.sav'
-modelo_ols = pickle.load(open("../models/final_lasso_model.sav", 'rb'))
+modelo_lasso = pickle.load(open("../models/final_lasso_model.sav", 'rb'))
 
 #Predict using the model whith new data
 

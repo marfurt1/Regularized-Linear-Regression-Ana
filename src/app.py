@@ -17,17 +17,17 @@ from sklearn.preprocessing import StandardScaler
 
 # Read dataset
 url = 'https://raw.githubusercontent.com/4GeeksAcademy/regularized-linear-regression-project-tutorial/main/dataset.csv'
-df_raw = pd.read_csv(url)
+df = pd.read_csv(url)
 
 
 
 #cargo los modelos
 #loaded_model = pickle.load(open(filename, 'rb'))
 filename='../models/final_ols_model.sav'
-modelo_ols = pickle.load(open("../models/final_ols_model.sav", 'rb'))
+modelo_ols = pickle.load(open(filename, 'rb'))
 
-filename='../models/final_lasso_model.sav'
-modelo_lasso = pickle.load(open("../models/final_lasso_model.sav", 'rb'))
+filename1='../models/final_lasso_model.sav'
+modelo_lasso = pickle.load(open(filename1, 'rb'))
 
 #Predict using the model whith new data
 

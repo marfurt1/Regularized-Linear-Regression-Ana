@@ -31,7 +31,11 @@ modelo_lasso = pickle.load(open(filename1, 'rb'))
 
 #Predict using the model whith new data
 
-# modelo.predict(modelo_datos.transform([[40,1,22,1,1,1,0,0]])))
+datos=[]
+X_para_ols= sm.add_constant(datos) 
 
+print('resultado de modelo ols: {}'.format(modelo_ols.predict(X_para_ols))) 
+
+print('resultado de modelo lasso: {}'.format(modelo_lasso.predict(datos))) #lasso no necesita transformacion
 
 

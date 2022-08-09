@@ -22,7 +22,8 @@ df = pd.read_csv(url)
 
 
 #cargo los modelos
-#loaded_model = pickle.load(open(filename, 'rb'))
+
+
 filename='../models/final_ols_model.sav'
 modelo_ols = pickle.load(open(filename, 'rb'))
 

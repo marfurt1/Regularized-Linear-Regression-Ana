@@ -1,9 +1,9 @@
-### Lasso to select features
 
+### Lasso to select features
 # Import libraries
-import pandas as pd 
-import numpy as np 
-import matplotlib.pyplot as plt  
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from sklearn.model_selection import train_test_split, cross_validate
@@ -19,63 +19,57 @@ from sklearn.preprocessing import StandardScaler
 url = 'https://raw.githubusercontent.com/4GeeksAcademy/regularized-linear-regression-project-tutorial/main/dataset.csv'
 df = pd.read_csv(url)
 
-
-
 #cargo los modelos
-
-
-
-
-
-
-#Predict using the model whith new data
 filename1='../models/final_lasso_model.sav'
 modelo_lasso = pickle.load(open(filename1, 'rb'))
-
-datos=[1.38300000e+03, 1.87000000e+02, 1.35213304e+01, 1.47000000e+02,
-       1.06290673e+01, 1.57000000e+02, 1.13521330e+01, 1.32000000e+02,
-       9.54446855e+00, 1.34000000e+02, 9.68908171e+00, 1.97000000e+02,
-       1.42443962e+01, 2.05000000e+02, 1.48228489e+01, 1.20000000e+02,
-       8.67678959e+00, 1.04000000e+02, 7.51988431e+00, 1.33400000e+03,
-       9.64569776e+01, 9.00000000e+00, 6.50759219e-01, 1.20000000e+01,
-       8.67678959e-01, 3.00000000e+00, 2.16919740e-01, 5.00000000e+00,
-       3.61532900e-01, 2.00000000e+01, 1.44613160e+00, 1.38300000e+03,
-       1.60000000e+01, 1.40000000e+01, 1.31000000e+01, 1.31000000e+01,
-       0.00000000e+00, 0.00000000e+00, 1.16000000e+01, 1.16000000e+01,
-       3.90000000e+01, 3.61000000e+02, 3.47000000e+02, 2.04000000e+02,
-       4.10000000e+00, 3.80000000e+01, 3.65000000e+01, 2.15000000e+01,
-       1.88000000e+02, 1.38000000e+01, 1.92000000e+01, 1.98000000e+01,
-       4.47040000e+04, 3.99280000e+04, 4.94800000e+04, 9.63000000e+02,
-       9.46000000e+02, 1.70000000e+01, 1.80000000e+00, 4.47040000e+04,
-       6.21000000e+01, 1.36800000e+03, 3.70000000e+02, 2.70000000e+01,
-       8.00000000e+00, 1.07400000e+03, 3.74000000e+01, 3.51000000e+01,
-       3.98000000e+01, 4.02000000e+02, 2.59000000e+01, 2.41000000e+01,
-       2.74000000e+01, 2.78000000e+02, 8.60000000e+00, 7.80000000e+00,
-       9.50000000e+00, 9.30000000e+01, 8.30000000e+00, 7.10000000e+00,
-       9.50000000e+00, 8.90000000e+01, 1.09000000e+01, 1.00000000e+01,
-       1.19000000e+01, 1.17000000e+02, 3.70000000e+00, 3.40000000e+00,
-       4.00000000e+00, 3.90000000e+01, 6.00000000e+00]
-
-print('resultado de modelo lasso: {}'.format(modelo_lasso.predict(datos))) #lasso no necesita transformacion       
-
 
 filename='../models/final_ols_model.sav'
 modelo_ols = pickle.load(open(filename, 'rb'))
 
-datos2=[1.87000000e+02, 1.35213304e+01, 1.13521330e+01, 9.68908171e+00,
-       1.97000000e+02, 1.42443962e+01, 1.04000000e+02, 1.33400000e+03,
-       9.64569776e+01, 9.00000000e+00, 6.50759219e-01, 3.00000000e+00,
-       5.00000000e+00, 3.61532900e-01, 2.00000000e+01, 1.44613160e+00,
-       1.38300000e+03, 1.60000000e+01, 1.40000000e+01, 3.90000000e+01,
-       3.61000000e+02, 3.47000000e+02, 2.04000000e+02, 4.10000000e+00,
-       1.88000000e+02, 1.38000000e+01, 1.92000000e+01, 1.98000000e+01,
-       3.99280000e+04, 1.70000000e+01, 1.80000000e+00, 6.21000000e+01,
-       3.98000000e+01, 2.78000000e+02, 9.30000000e+01, 9.50000000e+00,
-       1.17000000e+02]
+#Predict using the model whith new data
+datos=pd.read_csv('/workspace/Regularized-Linear-Regression-Ana/data/processed/datos_para_testeo', index_col=0)
 
-X_para_ols= sm.add_constant(datos2) 
-print('resultado de modelo ols: {}'.format(modelo_ols.predict(X_para_ols))) 
+print('El numero de camas predicho por el modelo lasso es: {}'.format(modelo_lasso.predict(datos)[0])) #lasso no necesita transformacion
 
+X_ols = datos[['0-9',
+ '0-9 y/o % of total pop',
+ '20-29 y/o % of total pop',
+ '40-49 y/o % of total pop',
+ '50-59',
+ '50-59 y/o % of total pop',
+ '80+',
+ 'White-alone pop',
+ '% White-alone',
+ 'Black-alone pop',
+ '% Black-alone',
+ 'Asian-alone pop',
+ 'Hawaiian/Pacific Islander-alone pop',
+ '% Hawaiian/PI-alone',
+ 'Two or more races pop',
+ '% Two or more races',
+ 'POP_ESTIMATE_2018',
+ 'N_POP_CHG_2018',
+ 'GQ_ESTIMATES_2018',
+ 'Less than a high school diploma 2014-18',
+ 'High school diploma only 2014-18',
+ "Some college or associate's degree 2014-18",
+ "Bachelor's degree or higher 2014-18",
+ 'Percent of adults with less than a high school diploma 2014-18',
+ 'POVALL_2018',
+ 'PCTPOVALL_2018',
+ 'PCTPOV017_2018',
+ 'PCTPOV517_2018',
+ 'CI90LBINC_2018',
+ 'Unemployed_2018',
+ 'Unemployment_rate_2018',
+ 'Med_HH_Income_Percent_of_State_Total_2018',
+ 'anycondition_Upper 95% CI',
+ 'Obesity_number',
+ 'Heart disease_number',
+ 'COPD_Upper 95% CI',
+ 'diabetes_number']]
+
+print('El numero de camas predicho por el modelo ols es: {}'.format(modelo_ols.predict(X_ols)[0]))
 
 
 

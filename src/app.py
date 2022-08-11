@@ -24,13 +24,13 @@ df = pd.read_csv(url)
 #cargo los modelos
 
 
-filename='../models/final_ols_model.sav'
-modelo_ols = pickle.load(open(filename, 'rb'))
 
-filename1='../models/final_lasso_model.sav'
-modelo_lasso = pickle.load(open(filename1, 'rb'))
+
+
 
 #Predict using the model whith new data
+filename1='../models/final_lasso_model.sav'
+modelo_lasso = pickle.load(open(filename1, 'rb'))
 
 datos=[1.38300000e+03, 1.87000000e+02, 1.35213304e+01, 1.47000000e+02,
        1.06290673e+01, 1.57000000e+02, 1.13521330e+01, 1.32000000e+02,
@@ -56,6 +56,12 @@ datos=[1.38300000e+03, 1.87000000e+02, 1.35213304e+01, 1.47000000e+02,
        1.19000000e+01, 1.17000000e+02, 3.70000000e+00, 3.40000000e+00,
        4.00000000e+00, 3.90000000e+01, 6.00000000e+00]
 
+print('resultado de modelo lasso: {}'.format(modelo_lasso.predict(datos))) #lasso no necesita transformacion       
+
+
+filename='../models/final_ols_model.sav'
+modelo_ols = pickle.load(open(filename, 'rb'))
+
 datos2=[1.87000000e+02, 1.35213304e+01, 1.13521330e+01, 9.68908171e+00,
        1.97000000e+02, 1.42443962e+01, 1.04000000e+02, 1.33400000e+03,
        9.64569776e+01, 9.00000000e+00, 6.50759219e-01, 3.00000000e+00,
@@ -68,9 +74,8 @@ datos2=[1.87000000e+02, 1.35213304e+01, 1.13521330e+01, 9.68908171e+00,
        1.17000000e+02]
 
 X_para_ols= sm.add_constant(datos2) 
-
 print('resultado de modelo ols: {}'.format(modelo_ols.predict(X_para_ols))) 
 
-print('resultado de modelo lasso: {}'.format(modelo_lasso.predict(datos))) #lasso no necesita transformacion
+
 
 
